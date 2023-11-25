@@ -4,25 +4,25 @@
 import PackageDescription
 
 let package = Package(
-    name: "rpi-ws281x0-swift",
+    name: "rpi_ws281x_swift",
     products: [
         // Products define the executables and libraries a package produces, and make them visible to other packages.
         .library(
-            name: "rpi-ws281x0-swift",
-            targets: ["rpi-ws281x0-swift"]),
+            name: "rpi_ws281x_swift",
+            targets: ["rpi_ws281x_swift"]),
+        .executable(name: "Demo", targets: ["Demo"])
     ],
     dependencies: [
         // Dependencies declare other packages that this package depends on.
         // .package(url: /* package url */, from: "1.0.0"),
     ],
     targets: [
-        // Targets are the basic building blocks of a package. A target can define a module or a test suite.
-        // Targets can depend on other targets in this package, and on products in packages this package depends on.
         .target(
-            name: "rpi-ws281x0-swift",
-            dependencies: []),
-        .testTarget(
-            name: "rpi-ws281x0-swiftTests",
-            dependencies: ["rpi-ws281x0-swift"]),
+            name: "rpi_ws281x_swift",
+            dependencies: ["rpi_ws281x"]),
+        // Contains rpi_ws281x C sources.
+        .target(name: "rpi_ws281x"),
+        // A demo of the library.
+        .executableTarget(name: "Demo", dependencies: ["rpi_ws281x_swift"])
     ]
 )

@@ -1,3 +1,3 @@
-# rpi-ws281x0-swift
+# rpi_ws281x_swift
 
-A description of this package.
+Swift bindings for the rpi_ws281x library.
