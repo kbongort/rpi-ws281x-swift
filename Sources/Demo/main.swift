@@ -22,7 +22,7 @@ let BLACK_COLOR: PackedColor = 0;
 
 func main() {
   do {
-    let channel = Channel(gpioNum: GPIO_NUM, ledCount: LED_COUNT, stripType: .ws2811_RBG)
+    let channel = Channel(gpioNum: GPIO_NUM, ledCount: LED_COUNT, stripType: .ws2811_GRB)
     let ledString = try LedString(channel0: channel)
 
     print("Running PWM on GPIO \(GPIO_NUM)")
@@ -42,6 +42,7 @@ func main() {
     onSigint = {
       timer.invalidate()
       ledString.render(Array(repeating: BLACK_COLOR, count: LED_COUNT))
+      ledString.finish()
     }
 
   } catch {
