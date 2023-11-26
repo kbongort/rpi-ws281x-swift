@@ -14,7 +14,7 @@ public class LedString {
       ws2811.channel.1 = channel1.cStructValue()
     }
 
-#if TARGET_OS_LINUX
+#if os(Linux)
     let ret = ws2811_init(&ws2811)
     if ret != WS2811_SUCCESS {
       throw Ws281xError(code: ret)
@@ -52,7 +52,7 @@ public class LedString {
     let channel1Values = ws2811.channel.1.leds != nil ? PackedColorArray(data: ws2811.channel.1.leds, count:  Int(ws2811.channel.1.count)) : nil
     callback(channel0Values, channel1Values);
 
-#if TARGET_OS_LINUX
+#if os(Linux)
     ws2811_render(&ws2811)
 #endif
   }
@@ -60,7 +60,7 @@ public class LedString {
   public func finish() {
     guard !didFinish else { return }
 
-#if TARGET_OS_LINUX
+#if os(Linux)
     ws2811_fini(&ws2811)
 #endif
     didFinish = true
