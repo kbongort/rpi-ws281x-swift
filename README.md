@@ -1,6 +1,6 @@
 # rpi_ws281x_swift
 
-Swift bindings for the rpi_ws281x library.
+Swift bindings for the [rpi_ws281x](https://github.com/jgarff/rpi_ws281x) library.
 
 ### Try it out
 ```
@@ -32,7 +32,7 @@ let package = Package(
 )
 ```
 
-Basic usage (see Sources/Demo/main.swift for a complete example):
+Basic usage (see [main.swift](https://github.com/kbongort/rpi-ws281x-swift/blob/main/Sources/Demo/main.swift) for a complete example):
 ```
 // Initialize
 let channel = Channel(gpioNum: GPIO_NUM, ledCount: LED_COUNT, stripType: .ws2811_RBG)
