@@ -30,6 +30,6 @@ extension PackedColor {
 }
 
 public struct PackedColorArray {
-  let data: UnsafeMutablePointer<PackedColor>
-  let count: Int;
+  public let data: UnsafeMutablePointer<PackedColor>
+  public let count: Int;
 }
