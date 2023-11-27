@@ -35,12 +35,12 @@ let package = Package(
 Basic usage (see [main.swift](https://github.com/kbongort/rpi-ws281x-swift/blob/main/Sources/Demo/main.swift) for a complete example):
 ```
 // Initialize
-let GPIO_NUM = GpioNum.Pwm0.gpio18  // GPIO 18 is pin 12 on Raspberry Pi 4
-let channel = Channel(gpioNum: GPIO_NUM, ledCount: 10, stripType: .ws2811_RBG)
-let ledString = try LedString(channel0: channel)
+let GPIO_NUM = Gpio.Pwm0.gpio18  // GPIO 18 is pin 12 on Raspberry Pi 4
+let channel = Channel(gpioNum: GPIO_NUM, ledCount: 10, stripType: .ws2811_GRB)
+let ledString = try LedString(channel)
 
 // Call .render() to update LEDs
-ledString.render(colors /* A [UInt32] of WRGB packed colors */)
+try ledString.render(colors /* A [UInt32] of WRGB packed colors */)
 
 // Clean up when done
 ledString.finish()
