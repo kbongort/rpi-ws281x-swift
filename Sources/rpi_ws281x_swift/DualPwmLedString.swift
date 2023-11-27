@@ -1,3 +1,6 @@
+/**
+ * DualPwmLedString can control two LED strings at once with dual-channel PWM.
+ */
 class DualPwmLedString: Ws2811 {
 
   public init(_ channel0: Channel<Gpio.Pwm0>,

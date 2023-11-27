@@ -12,13 +12,16 @@ public struct Ws2811Options {
   }
 }
 
+/**
+ * Wrapper for the ws2811 API.
+ */
 public class Ws2811 {
   private(set) public var ws2811 = ws2811_t()
 
   private var didFinish = false
 
   convenience init(channel0: Channel<some Channel0Gpio>,
-       options: Ws2811Options = Ws2811Options()) throws {
+                   options: Ws2811Options = Ws2811Options()) throws {
     try self.init(channel0: channel0, channel1: nil as Channel<Gpio.Custom>?, options: options)
   }
 
@@ -45,7 +48,12 @@ public class Ws2811 {
     finish()
   }
 
-  // Each callback receives a mutable array to write color values to and a count.
+  /**
+   * Invokes a callback to populate color data, then renders.
+   *
+   * - Parameter callback: A callback that takes a PackedColorArray for each channel.
+   *                       The callback should set the colors in the array for each channel in use.
+   */
   func renderWithCallback(_ callback: (PackedColorArray?, PackedColorArray?) -> Void) throws {
     guard !didFinish else { return }
 
@@ -53,12 +61,7 @@ public class Ws2811 {
     let channel1Values = ws2811.channel.1.leds != nil ? PackedColorArray(data: ws2811.channel.1.leds, count:  Int(ws2811.channel.1.count)) : nil
     callback(channel0Values, channel1Values);
 
-#if os(Linux)
-    let ret = ws2811_render(&ws2811)
-    if ret != WS2811_SUCCESS {
-      throw Ws281xError(code: ret)
-    }
-#endif
+    render()
   }
 
   func render() {

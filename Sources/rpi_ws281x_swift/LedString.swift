@@ -1,5 +1,8 @@
 import Foundation
 
+/**
+ * LedString controls a single string of LEDs.
+ */
 public class LedString: Ws2811 {
 
   public init(_ channel: Channel<some Channel0Gpio>, options: Ws2811Options = Ws2811Options()) throws {
