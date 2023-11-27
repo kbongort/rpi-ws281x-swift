@@ -1,10 +1,3 @@
-//
-//  File.swift
-//  
-//
-//  Created by Kenneth Bongort on 11/25/23.
-//
-
 import Foundation
 
 // Color packed as 0xWWRRGGBB
@@ -25,7 +18,10 @@ extension PackedColor {
   }
 
   public static func fromWrgb(white: Float, red: Float, green: Float, blue: Float) -> PackedColor {
-    fromWrgb(white: UInt8(white * 255), red: UInt8(red * 255), green: UInt8(green * 255), blue: UInt8(blue * 255))
+    fromWrgb(white: UInt8(white * 255),
+             red: UInt8(red * 255),
+             green: UInt8(green * 255),
+             blue: UInt8(blue * 255))
   }
 }
 

@@ -1,5 +1,13 @@
 import rpi_ws281x
 
+public protocol GpioNum {
+  var number: Int32 { get }
+}
+
+extension Int: GpioNum {
+  public var number: Int32 { Int32(self) }
+}
+
 /**
  * A channel contains configuration for an LED string running on a particular GPIO.
  */

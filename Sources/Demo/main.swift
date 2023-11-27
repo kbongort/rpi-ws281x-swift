@@ -1,34 +1,21 @@
 import Foundation
 import rpi_ws281x_swift
+import rpi_ws281x
 
-var onSigint: () -> Void = {}
-
-// Ignore SIGINT default handling to prevent immediate termination.
-signal(SIGINT, SIG_IGN)
-
-// Add SIGINT handler that fades the lights to black then exits.
-let sigintSrc = DispatchSource.makeSignalSource(signal: SIGINT, queue: .main)
-sigintSrc.setEventHandler {
-  onSigint()
-  exit(0)
-}
-sigintSrc.resume()
-
-
+let GPIO_PIN = LedStrip.Gpio.gpio18
 let LED_COUNT = 10
-let GPIO_NUM = Gpio.Pwm0.gpio18
 
-let BLACK_COLOR: PackedColor = 0;
+let BLACK_COLOR: PackedColor = .fromRgb(red: UInt8(0), green: 0, blue: 0);
 
 func main() {
   do {
-    let channel = Channel(gpio: Gpio.Pwm0.gpio18, ledCount: LED_COUNT, stripType: .ws2811_GRB)
-    let ledString = try LedString(channel)
+    var channel = Channel(gpio: LedStrip.Gpio.gpio18, ledCount: 10, stripType: .ws2811_GRB)
+    channel.ws2811Channel.brightness = 200
 
-    print("Running PWM on GPIO \(GPIO_NUM)")
+    let ledString = try LedStrip(Channel(gpio: GPIO_PIN, ledCount: LED_COUNT, stripType: .ws2811_GRB))
+    print("Running PWM on GPIO \(GPIO_PIN)")
 
     let startDate = Date()
-
     let timer = Timer.scheduledTimer(withTimeInterval:1.0/30, repeats: true) { _ in
       let t = Date().timeIntervalSince(startDate)
       let hue = Float((t / 10).truncatingRemainder(dividingBy: 1))
@@ -39,12 +26,12 @@ func main() {
       try? ledString.render(colors: Array(repeating: colorValue, count: LED_COUNT))
     }
 
-    onSigint = {
+    handleSignal(SIGINT) {
       timer.invalidate()
       try? ledString.render(colors: Array(repeating: BLACK_COLOR, count: LED_COUNT))
       ledString.finish()
+      exit(0)
     }
-
   } catch {
     print("Error initializing GPIO: \(error)")
   }

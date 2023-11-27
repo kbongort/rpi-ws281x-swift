@@ -6,10 +6,13 @@ import PackageDescription
 let package = Package(
     name: "rpi_ws281x_swift",
     products: [
-        // Products define the executables and libraries a package produces, and make them visible to other packages.
+        // 
         .library(
             name: "rpi_ws281x_swift",
             targets: ["rpi_ws281x_swift"]),
+        .library(
+            name: "rpi_ws281x",
+            targets: ["rpi_ws281x"]),
         .executable(name: "Demo", targets: ["Demo"])
     ],
     dependencies: [
