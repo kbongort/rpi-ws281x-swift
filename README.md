@@ -40,7 +40,7 @@ let channel = Channel(gpioNum: GPIO_NUM, ledCount: 10, stripType: .ws2811_GRB)
 let ledString = try LedString(channel)
 
 // Call .render() to update LEDs
-try ledString.render(colors /* A [UInt32] of WRGB packed colors */)
+try ledString.render(colors: colors /* A [UInt32] of WRGB packed colors */)
 
 // Clean up when done
 ledString.finish()
