@@ -9,9 +9,6 @@ let BLACK_COLOR: PackedColor = .fromRgb(red: UInt8(0), green: 0, blue: 0);
 
 func main() {
   do {
-    var channel = Channel(gpio: LedStrip.Gpio.gpio18, ledCount: 10, stripType: .ws2811_GRB)
-    channel.ws2811Channel.brightness = 200
-
     let ledString = try LedStrip(Channel(gpio: GPIO_PIN, ledCount: LED_COUNT, stripType: .ws2811_GRB))
     print("Running PWM on GPIO \(GPIO_PIN)")
 
