@@ -31,7 +31,7 @@ import PackageDescription
 let package = Package(
     name: "YourPackageName",
     dependencies: [
-        .package(url: "https://github.com/kbongort/rpi-ws281x-swift.git", from: "1.0.0"),
+        .package(url: "https://github.com/kbongort/rpi-ws281x-swift.git", from: "2.0.0"),
     ],
     targets: [
         .target(
