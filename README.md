@@ -1,4 +1,4 @@
-# rpi_ws281x_swift
+# rpi-ws281x-swift
 
 Swift bindings for the [rpi_ws281x](https://github.com/jgarff/rpi_ws281x) library.
 
@@ -126,7 +126,7 @@ channel.ws2811Channel.brightness = 127  // 50% brightness
 `PackedColor` is a type alias for `UInt32`, and provides helper methods for packing UInt8 and Float color values into WRGB UInt32s as required for rendering with this library.
 
 ```
-let red = PackedColor.fromRgb(1 as Float, 0, 0)
+let red = PackedColor.fromRgb(1.0, 0.0, 0.0)
 ```
 
 #### Error handling
