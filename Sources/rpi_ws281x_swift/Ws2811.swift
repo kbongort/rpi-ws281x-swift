@@ -94,10 +94,7 @@ public class Ws2811 {
     guard !didFinish else { return }
 
 #if os(Linux)
-    let ret = ws2811_set_custom_gamma_factor(&ws2811, gammaFactor)
-    if ret != WS2811_SUCCESS {
-      throw Ws281xError(code: ret)
-    }
+    ws2811_set_custom_gamma_factor(&ws2811, gammaFactor)
 #endif
   }
 

@@ -1,12 +1,15 @@
 import Foundation
 
-var signalSources: [Int32:() -> Void] = [:]
+var signalSources: [Int32:DispatchSourceSignal] = [:]
 
-func handleSignal(_ signal: Int32, _ handler: @escaping () -> Void) {
-  // Ignore default handling.
-  Foundation.signal(signal, SIG_IGN)
+func handleSignals(_ signals: [Int32], _ handler: @escaping () -> Void) {
+  for signal in signals {
+    // Ignore default handling.
+    Foundation.signal(signal, SIG_IGN)
 
-  let signalSource = DispatchSource.makeSignalSource(signal: signal, queue: .main)
-  signalSource.setEventHandler(handler: handler)
-  signalSources[signal] = handler
+    let signalSource = DispatchSource.makeSignalSource(signal: signal, queue: .main)
+    signalSource.setEventHandler(handler: handler)
+    signalSource.resume()
+    signalSources[signal] = signalSource
+  }
 }

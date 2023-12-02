@@ -26,7 +26,7 @@ func main() {
       try? ledString.render(colors: Array(repeating: colorValue, count: LED_COUNT))
     }
 
-    handleSignal(SIGINT) {
+    handleSignals([SIGINT, SIGTERM]) {
       timer.invalidate()
       try? ledString.render(colors: Array(repeating: BLACK_COLOR, count: LED_COUNT))
       ledString.finish()

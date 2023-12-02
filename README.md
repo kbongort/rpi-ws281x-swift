@@ -15,7 +15,8 @@ The demo program uses DMA on channel 10 to run PWM on GPIO 18, which corresponds
 ```
 git clone https://github.com/kbongort/rpi-ws281x-swift
 cd rpi-ws281x-swift
-sudo swift run
+swift build
+sudo .build/debug/Demo
 ```
 
 ### Use it in your project
