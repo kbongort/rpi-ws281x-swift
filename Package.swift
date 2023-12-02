@@ -4,7 +4,7 @@
 import PackageDescription
 
 let package = Package(
-    name: "rpi_ws281x_swift",
+    name: "rpi-ws281x-swift",
     products: [
         // 
         .library(
